@@ -32,7 +32,7 @@ const options = [
 ];
 
 export default function ThankYou() {
-  const form = useRecoilValue(formState);
+  const [form, setForm] = useRecoilState(formState);
   const [modal, setModal] = useRecoilState(modalState);
   const interestsList =
     form.interested.length > 0
@@ -43,7 +43,19 @@ export default function ThankYou() {
           })
           .join(", ")
       : "No interests selected";
-
+  function handleSubmit() {
+    setModal({ stage: 0, isOpen: false });
+    setForm({
+      userName: "",
+      language: "",
+      country: "",
+      interested: [],
+    });
+  }
+  function handleBack() {
+    const curStage = modal.stage;
+    setModal({ ...modal, stage: curStage - 1 });
+  }
   return (
     <>
       <DialogHeader className="w-full flex flex-col items-center">
@@ -83,12 +95,17 @@ export default function ThankYou() {
       </div>
 
       <Button
-        onClick={() => {
-          setModal({ ...modal, isOpen: false });
-        }}
+        onClick={handleSubmit}
         className="cursor-pointer w-full text-xl bg-orange-500 hover:bg-amber-600 mt-4"
       >
-        DONE
+        Submit
+      </Button>
+      <Button
+        variant="ghost"
+        className="cursor-pointer flex items-center gap-2 text-gray-600 hover:text-black"
+        onClick={handleBack}
+      >
+        {modal.stage !== 0 && "BACK"}
       </Button>
     </>
   );
