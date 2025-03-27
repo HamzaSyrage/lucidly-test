@@ -38,15 +38,15 @@ export default function Welcome() {
         </h2>
       </DialogHeader>
 
-      <div className="flex justify-between w-full bg-gray-200 rounded-md p-1 items-center">
+      <div className="flex justify-between w-full  bg-gray-200 rounded-md p-1 items-center">
         <input
           id="userName"
-          className="text-center bg-gray-200  text-orange-500 font-semibold  text-2xl border-none focus-visible:ring-0 focus-visible:outline-none"
+          className="text-center block w-64 md:w-full bg-gray-200  text-orange-500 font-semibold  text-2xl border-none focus-visible:ring-0 focus-visible:outline-none"
           type="text"
           value={form.userName}
           onChange={handleName}
         />
-        <label htmlFor="userName" className="">
+        <label htmlFor="userName" className="block">
           <img src={pen} alt="pen" className="size-4 text-orange-500 mr-1" />
         </label>
       </div>
